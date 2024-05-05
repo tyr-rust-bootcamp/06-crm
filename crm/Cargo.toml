@@ -3,4 +3,22 @@ name = "crm"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "server"
+path = "src/server.rs"
+
+[[bin]]
+name = "client"
+path = "src/client.rs"
+
 [dependencies]
+anyhow = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+
+[build-dependencies]
+anyhow = { workspace = true }
+prost-build = { workspace = true }
+tonic-build = { workspace = true }
