@@ -37,6 +37,7 @@ impl UserStats for UserStatsService {
         let query = request.into_inner();
         self.query(query).await
     }
+
     async fn raw_query(
         &self,
         request: Request<RawQueryRequest>,

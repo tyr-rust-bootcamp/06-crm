@@ -42,8 +42,8 @@ fn main() -> Result<()> {
         )
         .compile(
             &[
-                "../protos/user-stats/messages.proto",
-                "../protos/user-stats/rpc.proto",
+                "../protos/metadata/messages.proto",
+                "../protos/metadata/rpc.proto",
             ],
             &["../protos"],
         )

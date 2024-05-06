@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package metadata;
+
+import "google/protobuf/timestamp.proto";
+
+enum ContentType {
+  CONTENT_TYPE_UNSPECIFIED = 0;
+  CONTENT_TYPE_SHORT = 1;
+  CONTENT_TYPE_VLOG = 2;
+  CONTENT_TYPE_MOVIE = 3;
+  CONTENT_TYPE_AI_GENERATED = 4;
+}
+
+message Content {
+  uint32 id = 1;
+  string name = 2;
+  string description = 3;
+  repeated Publisher publishers = 4;
+  string url = 5;
+  string image = 6;
+  ContentType type = 7;
+  google.protobuf.Timestamp created_at = 8;
+  uint64 views = 9;
+  uint64 likes = 10;
+  uint64 dislikes = 11;
+}
+
+message Publisher {
+  uint32 id = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+message MaterializeRequest {
+  uint32 id = 1;
+}
