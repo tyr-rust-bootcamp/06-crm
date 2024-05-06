@@ -1,3 +1,4 @@
 crm/src/pb
 user-stat/src/pb
 crm-metadata/src/pb
+crm-send/src/pb

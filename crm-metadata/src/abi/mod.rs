@@ -12,17 +12,14 @@ use prost_types::Timestamp;
 use rand::Rng;
 use tokio::sync::mpsc;
 use tokio_stream::wrappers::ReceiverStream;
-use tonic::Response;
+use tonic::{Response, Status};
 
 const CHANNEL_SIZE: usize = 1024;
 
 impl MetadataService {
     pub async fn materialize(
         &self,
-        mut stream: impl Stream<Item = Result<MaterializeRequest, tonic::Status>>
-            + Send
-            + 'static
-            + Unpin,
+        mut stream: impl Stream<Item = Result<MaterializeRequest, Status>> + Send + 'static + Unpin,
     ) -> ServiceResult<ResponseStream> {
         let (tx, rx) = mpsc::channel(CHANNEL_SIZE);
         tokio::spawn(async move {
