@@ -17,6 +17,8 @@ prost = { workspace = true }
 prost-types = { workspace = true }
 tokio = { workspace = true }
 tonic = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 
 [build-dependencies]
 anyhow = { workspace = true }
