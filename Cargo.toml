@@ -6,6 +6,8 @@ resolver = "2"
 [workspace.dependencies]
 anyhow = "1.0.82"
 chrono = { version = "0.4.38", features = ["serde"] }
+crm-metadata = { path = "crm-metadata" }
+crm-send = { path = "crm-send" }
 derive_builder = "0.20.0"
 futures = "0.3.30"
 itertools = "0.12.1"
@@ -28,3 +30,4 @@ tonic = { version = "0.11.0", features = ["zstd", "tls"] }
 tonic-build = "0.11.0"
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+user-stat = { path = "user-stat" }

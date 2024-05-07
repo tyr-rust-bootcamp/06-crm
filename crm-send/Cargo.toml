@@ -3,13 +3,19 @@ name = "crm-send"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+default = []
+test_utils = ["fake", "nanoid"]
+
 
 [dependencies]
 anyhow = { workspace = true }
 chrono = { workspace = true }
 derive_builder = { workspace = true }
+fake = { version = "2.9.2", features = ["derive", "chrono"], optional = true }
 futures = { workspace = true }
 itertools = { workspace = true }
+nanoid = { version = "0.4.0", optional = true }
 prost = { workspace = true }
 prost-types = { workspace = true }
 rand = { workspace = true }
@@ -23,11 +29,11 @@ tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 uuid = { version = "1.8.0", features = ["v4"] }
 
+
 [build-dependencies]
 anyhow = { workspace = true }
 proto-builder-trait = { workspace = true }
 tonic-build = { workspace = true }
 
 [dev-dependencies]
-fake = { version = "2.9.2", features = ["derive", "chrono"] }
-nanoid = "0.4.0"
+crm-send = { workspace = true, features = ["test_utils"] }

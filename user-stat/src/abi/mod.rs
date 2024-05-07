@@ -94,16 +94,15 @@ mod tests {
     use futures::StreamExt;
 
     use crate::{
-        pb::{IdQuery, QueryRequestBuilder, TimeQuery},
-        AppConfig,
+        pb::QueryRequestBuilder,
+        test_utils::{id, tq},
     };
 
     use super::*;
 
     #[tokio::test]
     async fn raw_query_should_work() -> Result<()> {
-        let config = AppConfig::load().expect("Failed to load config");
-        let svc = UserStatsService::new(config).await;
+        let (_tdb, svc) = UserStatsService::new_for_test().await?;
         let mut stream = svc
             .raw_query(RawQueryRequest {
                 query: "select * from user_stats where created_at > '2024-01-01' limit 5"
@@ -120,8 +119,7 @@ mod tests {
 
     #[tokio::test]
     async fn query_should_work() -> Result<()> {
-        let config = AppConfig::load().expect("Failed to load config");
-        let svc = UserStatsService::new(config).await;
+        let (_tdb, svc) = UserStatsService::new_for_test().await?;
         let query = QueryRequestBuilder::default()
             .timestamp(("created_at".to_string(), tq(Some(120), None)))
             .timestamp(("last_visited_at".to_string(), tq(Some(30), None)))
@@ -134,25 +132,5 @@ mod tests {
             println!("{:?}", res);
         }
         Ok(())
-    }
-
-    fn id(id: &[u32]) -> IdQuery {
-        IdQuery { ids: id.to_vec() }
-    }
-
-    fn tq(lower: Option<i64>, upper: Option<i64>) -> TimeQuery {
-        TimeQuery {
-            lower: lower.map(to_ts),
-            upper: upper.map(to_ts),
-        }
-    }
-    fn to_ts(days: i64) -> Timestamp {
-        let dt = Utc::now()
-            .checked_sub_signed(chrono::Duration::days(days))
-            .unwrap();
-        Timestamp {
-            seconds: dt.timestamp(),
-            nanos: dt.timestamp_subsec_nanos() as i32,
-        }
     }
 }

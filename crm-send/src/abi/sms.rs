@@ -33,7 +33,7 @@ impl From<SmsMessage> for SendRequest {
     }
 }
 
-#[cfg(test)]
+#[cfg(feature = "test_utils")]
 impl SmsMessage {
     pub fn fake() -> Self {
         use fake::faker::phone_number::en::PhoneNumber;

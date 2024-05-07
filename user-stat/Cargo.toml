@@ -3,6 +3,9 @@ name = "user-stat"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+default = []
+test_utils = ["sqlx-db-tester"]
 
 [dependencies]
 anyhow = { workspace = true }
@@ -16,6 +19,7 @@ rand = { workspace = true }
 serde = { workspace = true }
 serde_yaml = { workspace = true }
 sqlx = { workspace = true }
+sqlx-db-tester = { version = "0.4.2", optional = true }
 tokio = { workspace = true }
 tonic = { workspace = true }
 tracing = { workspace = true }
@@ -29,3 +33,4 @@ tonic-build = { workspace = true }
 [dev-dependencies]
 fake = { version = "2.9.2", features = ["derive", "chrono"] }
 nanoid = "0.4.0"
+user-stat = { workspace = true, features = ["test_utils"] }

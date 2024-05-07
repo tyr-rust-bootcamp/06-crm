@@ -20,7 +20,20 @@ impl Sender for EmailMessage {
     }
 }
 
-#[cfg(test)]
+impl From<EmailMessage> for Msg {
+    fn from(email: EmailMessage) -> Self {
+        Msg::Email(email)
+    }
+}
+
+impl From<EmailMessage> for SendRequest {
+    fn from(email: EmailMessage) -> Self {
+        let msg: Msg = email.into();
+        SendRequest { msg: Some(msg) }
+    }
+}
+
+#[cfg(feature = "test_utils")]
 impl EmailMessage {
     pub fn fake() -> Self {
         use fake::faker::internet::en::SafeEmail;
@@ -33,18 +46,5 @@ impl EmailMessage {
             subject: "Hello".to_string(),
             body: "Hello, world!".to_string(),
         }
-    }
-}
-
-impl From<EmailMessage> for Msg {
-    fn from(email: EmailMessage) -> Self {
-        Msg::Email(email)
-    }
-}
-
-impl From<EmailMessage> for SendRequest {
-    fn from(email: EmailMessage) -> Self {
-        let msg: Msg = email.into();
-        SendRequest { msg: Some(msg) }
     }
 }
