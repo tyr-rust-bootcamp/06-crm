@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package crm;
+
+message WelcomeRequest {
+  string id = 1;
+  // interval for registered time (say 7 is registered 7 days ago)
+  uint32 interval = 2;
+  repeated uint32 content_ids = 3;
+}
+
+message WelcomeResponse {
+  string id = 1;
+}
+
+message RecallRequest {
+  string id = 1;
+  uint32 last_visit_interval = 2;
+  repeated uint32 content_ids = 3;
+}
+
+message RecallResponse {
+  string id = 1;
+}
+
+message RemindRequest {
+  string id = 1;
+  uint32 last_visit_interval = 2;
+}
+
+message RemindResponse {
+  string id = 1;
+}

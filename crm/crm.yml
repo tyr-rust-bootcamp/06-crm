@@ -1,0 +1,11 @@
+server:
+  port: 50000
+  sender_email: crm@acme.org
+  user_stats: http://localhost:50001
+  metadata: http://localhost:50002
+  notification: http://localhost:50003
+auth:
+  pk: |
+    -----BEGIN PUBLIC KEY-----
+    MCowBQYDK2VwAyEAfM+lwNHj6TRJ3EGP38lIJcOo9Dlt2u2JzcwWMbu7jQY=
+    -----END PUBLIC KEY-----

@@ -307,14 +307,24 @@ name = "crm"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "chrono",
+ "crm-metadata",
+ "crm-send",
+ "derive_builder",
+ "futures",
  "prost",
- "prost-build",
  "prost-types",
+ "proto-builder-trait",
+ "serde",
+ "serde_yaml",
  "tokio",
+ "tokio-stream",
  "tonic",
  "tonic-build",
  "tracing",
  "tracing-subscriber",
+ "user-stat",
+ "uuid",
 ]
 
 [[package]]
@@ -348,6 +358,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
+ "crm-metadata",
  "crm-send",
  "derive_builder",
  "fake",

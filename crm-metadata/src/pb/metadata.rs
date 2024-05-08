@@ -35,6 +35,7 @@ pub struct Publisher {
     #[prost(string, tag = "3")]
     pub avatar: ::prost::alloc::string::String,
 }
+#[derive(Eq, Hash)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MaterializeRequest {

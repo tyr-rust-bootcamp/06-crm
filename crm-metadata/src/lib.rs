@@ -5,6 +5,7 @@ mod config;
 
 use std::pin::Pin;
 
+pub use abi::Tpl;
 pub use config::AppConfig;
 use futures::Stream;
 use pb::{

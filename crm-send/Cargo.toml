@@ -11,6 +11,7 @@ test_utils = ["fake", "nanoid"]
 [dependencies]
 anyhow = { workspace = true }
 chrono = { workspace = true }
+crm-metadata.workspace = true
 derive_builder = { workspace = true }
 fake = { version = "2.9.2", features = ["derive", "chrono"], optional = true }
 futures = { workspace = true }

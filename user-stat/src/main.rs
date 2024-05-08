@@ -12,7 +12,7 @@ async fn main() -> Result<()> {
     let config = AppConfig::load().expect("Failed to load config");
     let addr = config.server.port;
     let addr = format!("[::1]:{}", addr).parse().unwrap();
-    info!("UserService listening on {}", addr);
+    info!("User stats service listening on {}", addr);
     let svc = UserStatsService::new(config).await.into_server();
     Server::builder().add_service(svc).serve(addr).await?;
     Ok(())
