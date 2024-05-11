@@ -18,6 +18,7 @@ crm-metadata = { workspace = true }
 crm-send = { workspace = true }
 derive_builder = { workspace = true }
 futures = { workspace = true }
+jwt-simple = "0.12.9"
 prost = { workspace = true }
 prost-types = { workspace = true }
 serde = { workspace = true }

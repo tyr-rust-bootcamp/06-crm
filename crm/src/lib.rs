@@ -12,8 +12,14 @@ use pb::{
     crm_server::{Crm, CrmServer},
     RecallRequest, RecallResponse, RemindRequest, RemindResponse, WelcomeRequest, WelcomeResponse,
 };
-use tonic::{async_trait, transport::Channel, Request, Response, Status};
+use tonic::{
+    async_trait, service::interceptor::InterceptedService, transport::Channel, Request, Response,
+    Status,
+};
+use tracing::info;
 use user_stat::pb::user_stats_client::UserStatsClient;
+
+use crate::abi::auth;
 
 pub struct CrmService {
     config: AppConfig,
@@ -28,6 +34,8 @@ impl Crm for CrmService {
         &self,
         request: Request<WelcomeRequest>,
     ) -> Result<Response<WelcomeResponse>, Status> {
+        let user: &auth::User = request.extensions().get().unwrap();
+        info!("User: {:?}", user);
         self.welcome(request.into_inner()).await
     }
 
@@ -59,7 +67,10 @@ impl CrmService {
         })
     }
 
-    pub fn into_server(self) -> CrmServer<Self> {
-        CrmServer::new(self)
+    pub fn into_server(
+        self,
+    ) -> Result<InterceptedService<CrmServer<CrmService>, auth::DecodingKey>> {
+        let dk = auth::DecodingKey::load(&self.config.auth.pk)?;
+        Ok(CrmServer::with_interceptor(self, dk))
     }
 }
